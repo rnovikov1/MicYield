@@ -1,11 +1,12 @@
 # MicYield
 
-**Music while you work**  
-**Quiet while you dictate**
+**Automatically Mute Mac Audio During Dictation**
 
 [Download for Mac](https://github.com/rrabochiy/MicYield/releases/download/v0.3.4/MicYield-Universal.zip) · [Website](https://micyield.xyz/) · [Support MicYield](https://buymeacoffee.com/sosun)
 
-Dictate tasks in Codex, ChatGPT, or your usual app without reaching for the volume keys. MicYield automatically mutes your Mac’s audio while your microphone is active, then restores your previous volume.
+Your Mac goes quiet while you dictate. Your sound comes back when you’re done.
+
+Made for people who dictate tasks in Codex, ChatGPT, or their usual app.
 
 A native menu bar app for macOS 14.2+, built with Swift 6 and SwiftUI.
 
