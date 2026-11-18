@@ -1,5 +1,7 @@
 # MicYield
 
+[Website](https://micyield.xyz) · [Download for Mac](https://github.com/rrabochiy/MicYield/releases/latest)
+
 A local menu bar app for macOS 14.2+, built with Swift 6 and SwiftUI. All app text is in English.
 
 MicYield mutes system audio while an app uses your microphone, then restores the sound level it changed. Music and videos keep playing silently. It uses Core Audio metadata and output controls, needs no browser extension, and never records audio.
