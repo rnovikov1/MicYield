@@ -1,8 +1,8 @@
 import SwiftUI
 import AppKit
 import ServiceManagement
-import AutoPauseCore
-import AutoPausePlatform
+import MicYieldCore
+import MicYieldPlatform
 
 @MainActor
 final class AppModel: ObservableObject {
@@ -29,7 +29,7 @@ final class AppModel: ObservableObject {
     @Published var loginError: String?
     private var observations: [NSObjectProtocol] = []
     private var distributedObservations: [NSObjectProtocol] = []
-    private lazy var worker = AutoPauseWorker { [weak self] report in
+    private lazy var worker = MicYieldWorker { [weak self] report in
         Task { @MainActor [weak self] in self?.report = report }
     }
 
@@ -87,7 +87,7 @@ final class AppModel: ObservableObject {
         if report?.microphoneActive == nil { return "Checking microphone activity…" }
         if duckingReport?.silenced == true { return "System audio is muted" }
         if report?.microphoneActive == true {
-            return report?.owned.isEmpty == false ? "Music paused by AutoPause" : "Microphone is in use"
+            return report?.owned.isEmpty == false ? "Music paused by MicYield" : "Microphone is in use"
         }
         if report?.owned.isEmpty == false { return "Restoring audio…" }
         return "Ready — microphone is not in use"

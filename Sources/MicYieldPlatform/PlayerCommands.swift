@@ -12,7 +12,7 @@ public struct PlayerCommands: Sendable {
         let xml = try XMLDocument(data: data, options: [.nodeLoadExternalEntitiesNever])
         func value(_ path: String, bytes: Int) throws -> String {
             guard let value = try xml.nodes(forXPath: path).first?.stringValue,
-                  value.utf8.count == bytes else { throw MediaError.message("This app does not provide the playback controls AutoPause needs.") }
+                  value.utf8.count == bytes else { throw MediaError.message("This app does not provide the playback controls MicYield needs.") }
             return value
         }
         let pause = try value("//command[@name='pause']/@code", bytes: 8)

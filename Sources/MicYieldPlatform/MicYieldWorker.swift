@@ -1,5 +1,5 @@
 import Foundation
-import AutoPauseCore
+import MicYieldCore
 
 public struct WorkerReport: Equatable, Sendable {
     public var microphoneActive: Bool?
@@ -18,7 +18,7 @@ public struct WorkerReport: Equatable, Sendable {
 }
 
 /// All mutable state lives on queue; only Sendable reports leave the worker.
-public final class AutoPauseWorker: @unchecked Sendable {
+public final class MicYieldWorker: @unchecked Sendable {
     private let queue = DispatchQueue(label: "local.AutoPause.monitor", qos: .utility)
     private let report: @Sendable (WorkerReport) -> Void
     private let gate = ControlGate()

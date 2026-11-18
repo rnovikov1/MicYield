@@ -1,5 +1,5 @@
 import Foundation
-import AutoPauseCore
+import MicYieldCore
 
 extension Player {
     public var title: String { self == .music ? "Apple Music" : "Spotify" }

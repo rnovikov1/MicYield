@@ -1,5 +1,5 @@
 import Foundation
-import AutoPauseCore
+import MicYieldCore
 
 final class MediaFixture: MediaControlling {
     var players: [Player: PlaybackSnapshot] = [:]

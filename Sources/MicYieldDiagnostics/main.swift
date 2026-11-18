@@ -1,8 +1,8 @@
 import Foundation
 import AppKit
 import ServiceManagement
-import AutoPauseCore
-import AutoPausePlatform
+import MicYieldCore
+import MicYieldPlatform
 
 let reader = MicrophoneReader()
 let media = MediaController()
@@ -10,10 +10,10 @@ let arguments = CommandLine.arguments
 let watchIndex = arguments.firstIndex(of: "--watch")
 let seconds = watchIndex.flatMap { index in arguments.indices.contains(index + 1) ? Double(arguments[index + 1]) : nil } ?? 0
 if watchIndex != nil, seconds <= 0 || seconds > 300 {
-    print("Usage: AutoPauseDiagnostics [--watch 1...300]")
+    print("Usage: MicYieldDiagnostics [--watch 1...300]")
     exit(2)
 }
-print("AutoPause diagnostics; metadata only, no audio capture or permission prompts")
+print("MicYield diagnostics; metadata only, no audio capture or permission prompts")
 print("macOS: \(ProcessInfo.processInfo.operatingSystemVersionString)")
 for player in Player.allCases {
     print("\(player.title): \(media.permission(player).title)")
@@ -49,14 +49,14 @@ if arguments.contains("--outputs") || arguments.contains("--exercise-duck") {
             let during = try outputs.capture()
             guard during.count == before.count,
                   during.allSatisfy({ abs($0.value - $0.control.silentValue) < 0.00001 }), engine.error == nil else {
-                throw NSError(domain: "AutoPause", code: 1, userInfo: [NSLocalizedDescriptionKey: engine.error ?? "Output did not become silent"])
+                throw NSError(domain: "MicYield", code: 1, userInfo: [NSLocalizedDescriptionKey: engine.error ?? "Output did not become silent"])
             }
             print("PASS native silence: \(engine.leases.count) owned control(s)")
             engine.update(microphone: false, now: 1)
             engine.update(microphone: false, now: 2)
             for value in before {
                 guard let restored = try outputs.read(value.control), abs(restored - value.value) < 0.00001 else {
-                    throw NSError(domain: "AutoPause", code: 2, userInfo: [NSLocalizedDescriptionKey: "Original output level was not restored"])
+                    throw NSError(domain: "MicYield", code: 2, userInfo: [NSLocalizedDescriptionKey: "Original output level was not restored"])
                 }
             }
             print("PASS native restore: all output levels match their original values")

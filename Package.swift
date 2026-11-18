@@ -2,18 +2,18 @@
 import PackageDescription
 
 let package = Package(
-    name: "AutoPause",
+    name: "MicYield",
     platforms: [.macOS("14.2")],
     products: [
-        .executable(name: "AutoPause", targets: ["AutoPause"]),
-        .executable(name: "AutoPauseDiagnostics", targets: ["AutoPauseDiagnostics"])
+        .executable(name: "MicYield", targets: ["MicYield"]),
+        .executable(name: "MicYieldDiagnostics", targets: ["MicYieldDiagnostics"])
     ],
     targets: [
-        .target(name: "AutoPauseCore"),
-        .target(name: "AutoPausePlatform", dependencies: ["AutoPauseCore"]),
-        .executableTarget(name: "AutoPause", dependencies: ["AutoPauseCore", "AutoPausePlatform"]),
-        .executableTarget(name: "AutoPauseDiagnostics", dependencies: ["AutoPauseCore", "AutoPausePlatform"]),
-        .executableTarget(name: "AutoPauseTests", dependencies: ["AutoPauseCore", "AutoPausePlatform"], path: "Tests/AutoPauseCoreTests")
+        .target(name: "MicYieldCore"),
+        .target(name: "MicYieldPlatform", dependencies: ["MicYieldCore"]),
+        .executableTarget(name: "MicYield", dependencies: ["MicYieldCore", "MicYieldPlatform"]),
+        .executableTarget(name: "MicYieldDiagnostics", dependencies: ["MicYieldCore", "MicYieldPlatform"]),
+        .executableTarget(name: "MicYieldTests", dependencies: ["MicYieldCore", "MicYieldPlatform"], path: "Tests/MicYieldCoreTests")
     ],
     swiftLanguageModes: [.v6]
 )

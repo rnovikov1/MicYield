@@ -1,6 +1,6 @@
 import Foundation
-import AutoPauseCore
-import AutoPausePlatform
+import MicYieldCore
+import MicYieldPlatform
 
 final class PlatformContractTests {
     func testDisableInvalidatesInFlightControlEvenAfterReenable() throws {

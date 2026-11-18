@@ -1,9 +1,9 @@
 import SwiftUI
-import AutoPauseCore
-import AutoPausePlatform
+import MicYieldCore
+import MicYieldPlatform
 import ServiceManagement
 
-struct AutoPauseMenu: View {
+struct MicYieldMenu: View {
     @ObservedObject var model: AppModel
 
     var body: some View {
@@ -14,14 +14,14 @@ struct AutoPauseMenu: View {
                     .foregroundStyle(model.report?.microphoneActive == true ? Color.orange : Color.accentColor)
                     .accessibilityHidden(true)
                 VStack(alignment: .leading, spacing: 3) {
-                    Text("AutoPause").font(.headline)
+                    Text("MicYield").font(.headline)
                     Text(model.status).font(.subheadline).foregroundStyle(.secondary)
                 }
                 Spacer()
             }
 
             settingToggle("Automatic audio control", description:
-                "Pause Apple Music and Spotify when an app uses your microphone. Resume only music paused by AutoPause.",
+                "Pause Apple Music and Spotify when an app uses your microphone. Resume only music paused by MicYield.",
                 isOn: $model.enabled)
             settingToggle("Mute all other audio", description:
                 "Silence YouTube and other apps during microphone use. Videos keep playing; your previous sound level returns afterward.",
@@ -37,11 +37,11 @@ struct AutoPauseMenu: View {
             }
             Button("Open Automation Settings…", action: model.openAutomationSettings)
                 .buttonStyle(.link)
-                .help("Choose which music apps AutoPause can pause and resume.")
+                .help("Choose which music apps MicYield can pause and resume.")
 
             Divider()
             settingToggle("Open at login", description:
-                "Start AutoPause automatically when you sign in to your Mac.",
+                "Start MicYield automatically when you sign in to your Mac.",
                 isOn: Binding(get: { model.loginEnabled }, set: { model.setLoginEnabled($0) }))
             if model.loginState == .requiresApproval {
                 Button("Approve in Login Items…", action: model.openLoginSettings)
@@ -62,9 +62,9 @@ struct AutoPauseMenu: View {
                     .font(.caption).foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
                 Spacer(minLength: 0)
-                Button("Quit AutoPause", action: model.quit)
+                Button("Quit MicYield", action: model.quit)
                     .keyboardShortcut("q")
-                    .help("Close AutoPause and restore any system sound it muted.")
+                    .help("Close MicYield and restore any system sound it muted.")
             }
         }
         .padding(18)
@@ -90,7 +90,7 @@ struct AutoPauseMenu: View {
         return HStack {
             VStack(alignment: .leading, spacing: 3) {
                 Text(player.title).font(.subheadline.weight(.medium))
-                Text(model.report?.owned.contains(player) == true ? "Paused by AutoPause" : permission?.title ?? "Checking access…")
+                Text(model.report?.owned.contains(player) == true ? "Paused by MicYield" : permission?.title ?? "Checking access…")
                     .font(.caption).foregroundStyle(.secondary)
             }
             Spacer()

@@ -2,20 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<!-- Keep the legacy identity for saved preferences, permissions, and audio recovery. -->
 	<key>CFBundleIdentifier</key>
 	<string>local.AutoPause</string>
 	<key>CFBundleName</key>
-	<string>AutoPause</string>
+	<string>MicYield</string>
 	<key>CFBundleDisplayName</key>
-	<string>AutoPause</string>
+	<string>MicYield</string>
 	<key>CFBundleExecutable</key>
-	<string>AutoPause</string>
+	<string>MicYield</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.2.1</string>
+	<string>0.3.0</string>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>4</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>14.2</string>
 	<key>LSUIElement</key>
@@ -23,7 +24,7 @@
 	<key>NSHighResolutionCapable</key>
 	<true/>
 	<key>NSAppleEventsUsageDescription</key>
-	<string>AutoPause pauses Apple Music and Spotify while your microphone is in use, then resumes only the music it paused.</string>
+	<string>MicYield pauses Apple Music and Spotify while your microphone is in use, then resumes only the music it paused.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleLocalizations</key>

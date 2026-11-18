@@ -1,6 +1,6 @@
 import Foundation
 import CoreAudio
-import AutoPauseCore
+import MicYieldCore
 
 /// Controls the media and system default outputs using public Core Audio properties.
 public final class SystemOutputController: OutputControlling {

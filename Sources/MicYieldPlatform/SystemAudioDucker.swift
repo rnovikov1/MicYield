@@ -1,5 +1,5 @@
 import Foundation
-import AutoPauseCore
+import MicYieldCore
 
 public struct DuckingReport: Equatable, Sendable {
     public let silenced: Bool

@@ -1,6 +1,6 @@
 import AppKit
 import ApplicationServices
-import AutoPauseCore
+import MicYieldCore
 
 /// Serial worker only. Events target an existing PID, so a quit player is never relaunched.
 public final class MediaController: MediaControlling {
@@ -106,7 +106,7 @@ public final class MediaController: MediaControlling {
         record.setDescriptor(NSAppleEventDescriptor(typeCode: propertyCode), forKeyword: AEKeyword(keyAEKeyData))
         record.setDescriptor(container, forKeyword: AEKeyword(keyAEContainer))
         guard let object = record.coerce(toDescriptorType: typeObjectSpecifier) else {
-            throw MediaError.message("Could not send a playback command. Try restarting AutoPause.")
+            throw MediaError.message("Could not send a playback command. Try restarting MicYield.")
         }
         return object
     }

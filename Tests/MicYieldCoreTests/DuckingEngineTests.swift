@@ -1,5 +1,5 @@
 import Foundation
-import AutoPauseCore
+import MicYieldCore
 
 final class OutputFixture: OutputControlling {
     let volume = OutputControlID(deviceUID: "speakers", kind: .volume)

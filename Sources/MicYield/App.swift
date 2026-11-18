@@ -3,13 +3,13 @@ import Darwin
 import AppKit
 
 @main
-struct AutoPauseApp: App {
+struct MicYieldApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var delegate
     @StateObject private var model = AppModel()
 
     var body: some Scene {
-        MenuBarExtra("AutoPause", systemImage: model.menuSymbol) {
-            AutoPauseMenu(model: model)
+        MenuBarExtra("MicYield", systemImage: model.menuSymbol) {
+            MicYieldMenu(model: model)
         }
         .menuBarExtraStyle(.window)
     }
