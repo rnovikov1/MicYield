@@ -8,17 +8,17 @@ MicYield mutes system audio while an app uses your microphone, then restores the
 
 ## Download for Mac
 
-- [Apple Silicon (M1 or newer)](https://github.com/rrabochiy/MicYield/releases/download/v0.3.1/MicYield-Apple-Silicon.zip)
-- [Intel](https://github.com/rrabochiy/MicYield/releases/download/v0.3.1/MicYield-Intel.zip)
+- [Apple Silicon (M1 or newer)](https://github.com/rrabochiy/MicYield/releases/download/v0.3.2/MicYield-Apple-Silicon.zip)
+- [Intel](https://github.com/rrabochiy/MicYield/releases/download/v0.3.2/MicYield-Intel.zip)
 - [All releases](https://github.com/rrabochiy/MicYield/releases)
 
 Requires macOS 14.2 or later. Unzip the download, move MicYield to Applications, and launch it from your menu bar.
 
 ## Using the menu
 
-- **Automatic audio muting** silences the default media and system-sound outputs while the microphone is in use. Turning it off restores output controls changed by MicYield immediately.
+- **Mute audio on mic use** silences the default media and system-sound outputs while the microphone is in use. Turning it off restores output controls changed by MicYield immediately.
 - **Open at login** starts MicYield when you sign in to your Mac.
-- **Quit MicYield** closes the app and restores system sound settings changed by MicYield.
+- **Quit & restore sound** closes the app and restores system sound settings changed by MicYield.
 
 Audio returns after the microphone has been idle for 0.8 seconds. Calls and other apps holding an audio input open trigger the same behavior as dictation. Playback keeps advancing while muted; MicYield does not control music players.
 
@@ -33,10 +33,10 @@ There are no network requests, servers, telemetry, or subscriptions in the app.
 Install Apple's Command Line Tools (`xcode-select --install`) or Xcode. No Homebrew, external packages, subscription, or paid developer account is required.
 
 ```sh
-cd MicYield
+cd /Users/imac/DEV_LOCAL/AutoPause
 bash scripts/test.sh
 bash scripts/build.sh
-open build/MicYield.app
+open /Users/imac/DEV_LOCAL/AutoPause/build/MicYield.app
 ```
 
 The app bundle is `build/MicYield.app`, built for the current Mac's architecture. For everyday use, keep one installed copy at `/Applications/MicYield.app` and launch it from there.

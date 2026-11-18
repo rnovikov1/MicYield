@@ -63,20 +63,7 @@ final class AppModel: ObservableObject {
         ducker.setSuspended(suspended, reason: reason)
     }
 
-    var menuSymbol: String {
-        if !enabled { return "speaker.slash.circle" }
-        if report?.microphoneActive == true { return "mic.fill" }
-        if report?.microphoneActive == nil || report?.error != nil { return "exclamationmark.circle" }
-        return "waveform.circle"
-    }
-    var status: String {
-        if !enabled { return "Automatic audio muting is off" }
-        if report?.suspended == true { return "Waiting for your Mac to unlock" }
-        if report?.microphoneActive == nil { return "Checking microphone activity…" }
-        if report?.silenced == true { return "System audio is muted" }
-        if report?.microphoneActive == true { return "Microphone is in use" }
-        return "Ready — microphone is not in use"
-    }
+    var menuSymbol: String { AudioMenuStatus(enabled: enabled, report: report).symbol }
     var loginEnabled: Bool { loginState == .enabled || loginState == .requiresApproval }
     func refreshLoginState() { loginState = SMAppService.mainApp.status }
     func setLoginEnabled(_ enabled: Bool) {
