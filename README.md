@@ -1,10 +1,20 @@
 # MicYield
 
-[Website](https://micyield.xyz) · [Download for Mac](https://github.com/rrabochiy/MicYield/releases/latest)
+**Music while you work**  
+**Quiet while you dictate**
 
-A local menu bar app for macOS 14.2+, built with Swift 6 and SwiftUI.
+[Download for Mac](https://github.com/rrabochiy/MicYield/releases/download/v0.3.4/MicYield-Universal.zip) · [Website](https://micyield.xyz/) · [Support MicYield](https://buymeacoffee.com/sosun)
 
-MicYield mutes system audio while an app uses your microphone, then restores the sound level it changed. Music and videos keep playing silently. It uses Core Audio metadata and output controls, needs no browser extension, and never records audio.
+Dictate tasks in Codex, ChatGPT, or your usual app without reaching for the volume keys. MicYield automatically mutes your Mac’s audio while your microphone is active, then restores your previous volume.
+
+A native menu bar app for macOS 14.2+, built with Swift 6 and SwiftUI.
+
+- Mutes audio from music players, videos, browsers, and other apps on your Mac’s default outputs.
+- Restores only its own sound changes; your manual adjustments take priority.
+- Runs locally without recording audio or sending telemetry.
+- Free and open source under MIT, with no account, subscription, or browser extension.
+
+Music and videos keep playing silently while muted. MicYield controls sound output, rather than pausing playback.
 
 ## Download for Mac
 
@@ -13,7 +23,15 @@ MicYield mutes system audio while an app uses your microphone, then restores the
 - [Intel](https://github.com/rrabochiy/MicYield/releases/download/v0.3.4/MicYield-Intel.zip)
 - [All releases](https://github.com/rrabochiy/MicYield/releases)
 
-Requires macOS 14.2 or later. Unzip the download, move MicYield to Applications, and launch it from your menu bar.
+Requires macOS 14.2 or later. The Universal download runs on both Apple Silicon and Intel Macs.
+
+1. Open the downloaded ZIP.
+2. Move **MicYield.app** to **Applications**.
+3. Launch MicYield from Applications and look for its icon in the menu bar. It does not open a regular app window.
+4. Turn on **Mute audio on mic use**.
+5. Play some audio and start a short dictation. The sound mutes while the microphone is active and returns after you finish.
+
+Optionally enable **Open at login** to have MicYield ready when you sign in. During calls, turn off **Mute audio on mic use** so you can hear the other participants.
 
 ## Using the menu
 
@@ -27,7 +45,7 @@ Audio returns after the microphone has been idle for 0.8 seconds. Calls and othe
 
 ## Permissions and privacy
 
-MicYield does not use Apple Events or macOS Automation. It needs no permission to control other apps, and has no Automation permission buttons or entitlement. It also needs no Microphone, Screen Recording, or Accessibility access: Core Audio reports input activity without providing audio samples.
+MicYield checks microphone activity through Core Audio metadata without receiving audio samples. It does not record or transcribe your voice and does not need Microphone, Screen Recording, or Accessibility access.
 
 There are no network requests, servers, telemetry, or subscriptions in the app.
 
@@ -36,10 +54,11 @@ There are no network requests, servers, telemetry, or subscriptions in the app.
 Install Apple's Command Line Tools (`xcode-select --install`) or Xcode. No Homebrew, external packages, subscription, or paid developer account is required.
 
 ```sh
-cd /Users/imac/DEV_LOCAL/AutoPause
+git clone https://github.com/rrabochiy/MicYield.git
+cd MicYield
 bash scripts/test.sh
 bash scripts/build.sh
-open /Users/imac/DEV_LOCAL/AutoPause/build/MicYield.app
+open build/MicYield.app
 ```
 
 The app bundle is `build/MicYield.app`, built for the current Mac's architecture. For everyday use, keep one installed copy at `/Applications/MicYield.app` and launch it from there.
@@ -80,7 +99,7 @@ build/MicYieldDiagnostics --outputs
 build/MicYieldDiagnostics --exercise-duck
 ```
 
-The diagnostic tool reads input metadata and output controls. It does not query or control music players, request Automation access, or record sound. The explicit `--exercise-duck` option briefly changes system sound and restores it afterward.
+The diagnostic tool reads input metadata and output controls. It does not query or control music players or record sound. The explicit `--exercise-duck` option briefly changes system sound and restores it afterward.
 
 ## Verification and limits
 
