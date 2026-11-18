@@ -111,3 +111,9 @@ Input activity is polled every 200 ms. Very short input sessions can be missed; 
 ## License
 
 MIT. See [LICENSE](LICENSE). Source code is available to read, build, modify, and redistribute. The Buy Me a Coffee badge is provided by its respective owner; see [asset notice](Resources/BuyMeACoffee-NOTICE.txt).
+
+## Support MicYield
+
+MicYield is free and open source. If it helps your work, you can optionally support its development with a coffee.
+
+<a href="https://buymeacoffee.com/sosun"><img src="Resources/BuyMeACoffee.png" alt="Buy me a coffee" width="164" height="46"></a>
