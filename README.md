@@ -8,8 +8,9 @@ MicYield mutes system audio while an app uses your microphone, then restores the
 
 ## Download for Mac
 
-- [Apple Silicon (M1 or newer)](https://github.com/rrabochiy/MicYield/releases/download/v0.3.3/MicYield-Apple-Silicon.zip)
-- [Intel](https://github.com/rrabochiy/MicYield/releases/download/v0.3.3/MicYield-Intel.zip)
+- [Download for Mac — Universal, Apple Silicon and Intel](https://github.com/rrabochiy/MicYield/releases/download/v0.3.4/MicYield-Universal.zip)
+- [Apple Silicon (M1 or newer)](https://github.com/rrabochiy/MicYield/releases/download/v0.3.4/MicYield-Apple-Silicon.zip)
+- [Intel](https://github.com/rrabochiy/MicYield/releases/download/v0.3.4/MicYield-Intel.zip)
 - [All releases](https://github.com/rrabochiy/MicYield/releases)
 
 Requires macOS 14.2 or later. Unzip the download, move MicYield to Applications, and launch it from your menu bar.
@@ -18,6 +19,8 @@ Requires macOS 14.2 or later. Unzip the download, move MicYield to Applications,
 
 - **Mute audio on mic use** silences the default media and system-sound outputs while the microphone is in use. Turning it off restores output controls changed by MicYield immediately.
 - **Open at login** starts MicYield when you sign in to your Mac.
+- **MicYield website** opens [micyield.xyz](https://micyield.xyz/) in your browser.
+- **Buy me a coffee** opens the optional [support page](https://buymeacoffee.com/sosun). No payment widget or background network request runs in the app.
 - **Quit & restore sound** closes the app and restores system sound settings changed by MicYield.
 
 Audio returns after the microphone has been idle for 0.8 seconds. Calls and other apps holding an audio input open trigger the same behavior as dictation. Playback keeps advancing while muted; MicYield does not control music players.
@@ -55,7 +58,7 @@ Build both architectures and package separate app downloads with the installed A
 bash scripts/release.sh
 ```
 
-Artifacts: `build/releases/MicYield-Apple-Silicon.zip` and `build/releases/MicYield-Intel.zip`. Each contains `MicYield.app`; extract it and move it to Applications. Signing uses `AUTOPAUSE_SIGN_IDENTITY` when supplied, otherwise ad-hoc signing.
+Artifacts are written to `build/releases/v<version>/`: `MicYield-Universal.zip`, `MicYield-Apple-Silicon.zip`, and `MicYield-Intel.zip`. The Universal app contains both native executable architectures. Each contains `MicYield.app`; extract it and move it to Applications. Signing uses `AUTOPAUSE_SIGN_IDENTITY` when supplied, otherwise ad-hoc signing.
 
 For a single architecture, run `AUTOPAUSE_ARCH=arm64 bash scripts/build.sh` or `AUTOPAUSE_ARCH=x86_64 bash scripts/build.sh`. Explicit targets use `build/arm64` and `build/x86_64`; plain `bash scripts/build.sh` retains the host build at `build/MicYield.app`. Cross-compilation verifies binary architecture and signature; it does not replace testing on the target hardware.
 
@@ -87,4 +90,4 @@ Input activity is polled every 200 ms. Very short input sessions can be missed; 
 
 ## License
 
-MIT. See [LICENSE](LICENSE). Source code is available to read, build, modify, and redistribute.
+MIT. See [LICENSE](LICENSE). Source code is available to read, build, modify, and redistribute. The Buy Me a Coffee badge is provided by its respective owner; see [asset notice](Resources/BuyMeACoffee-NOTICE.txt).

@@ -133,6 +133,38 @@ struct MicYieldMenuContent: View {
 
             Divider()
 
+            HStack(alignment: .center, spacing: 12) {
+                Link(destination: URL(string: "https://micyield.xyz/")!) {
+                    HStack(spacing: 4) {
+                        Text("MicYield website")
+                        Image(systemName: "arrow.up.right").accessibilityHidden(true)
+                    }
+                    .font(.caption)
+                }
+                .help("Open micyield.xyz in your browser.")
+                Spacer(minLength: 0)
+                Link(destination: URL(string: "https://buymeacoffee.com/sosun")!) {
+                    if let url = Bundle.main.url(forResource: "BuyMeACoffee", withExtension: "png"),
+                       let badge = NSImage(contentsOf: url) {
+                        Image(nsImage: badge)
+                            .renderingMode(.original)
+                            .resizable()
+                            .interpolation(.high)
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 140, height: 40)
+                    } else {
+                        Label("Buy me a coffee", systemImage: "cup.and.saucer")
+                            .font(.caption)
+                            .foregroundStyle(.black)
+                            .frame(width: 140, height: 40)
+                            .background(Color(red: 1, green: 0.87, blue: 0), in: RoundedRectangle(cornerRadius: 8))
+                    }
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Support MicYield on Buy Me a Coffee")
+                .help("Open buymeacoffee.com/sosun in your browser.")
+            }
+
             HStack(alignment: .center, spacing: 8) {
                 Label("Local. No recording.", systemImage: "lock")
                     .font(.caption)
