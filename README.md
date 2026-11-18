@@ -2,7 +2,7 @@
 
 **Automatically Mute Mac Audio During Dictation**
 
-[Download for Mac](https://github.com/rrabochiy/MicYield/releases/download/v0.3.4/MicYield-Universal.zip) · [Website](https://micyield.xyz/) · [Support MicYield](https://buymeacoffee.com/sosun)
+[Download for Mac](https://github.com/rrabochiy/MicYield/releases/download/v0.3.5/MicYield.dmg) · [Website](https://micyield.xyz/) · [Support MicYield](https://buymeacoffee.com/sosun)
 
 Your Mac goes quiet while you dictate. Your sound comes back when you’re done.
 
@@ -19,17 +19,16 @@ Music and videos keep playing silently while muted. MicYield controls sound outp
 
 ## Download for Mac
 
-- [Download for Mac — Universal, Apple Silicon and Intel](https://github.com/rrabochiy/MicYield/releases/download/v0.3.4/MicYield-Universal.zip)
-- [Apple Silicon (M1 or newer)](https://github.com/rrabochiy/MicYield/releases/download/v0.3.4/MicYield-Apple-Silicon.zip)
-- [Intel](https://github.com/rrabochiy/MicYield/releases/download/v0.3.4/MicYield-Intel.zip)
+- [Download for Mac — Universal, Apple Silicon and Intel](https://github.com/rrabochiy/MicYield/releases/download/v0.3.5/MicYield.dmg)
+- [Illustrated installation guide](https://micyield.xyz/download/)
 - [All releases](https://github.com/rrabochiy/MicYield/releases)
 
 Requires macOS 14.2 or later. The Universal download runs on both Apple Silicon and Intel Macs.
 
-1. Open the downloaded ZIP.
-2. Move **MicYield.app** to **Applications**.
+1. Open **MicYield.dmg** from your Downloads folder.
+2. Drag **MicYield** onto **Applications** in the disk image window.
 3. Launch MicYield from Applications and look for its icon in the menu bar. It does not open a regular app window.
-4. Turn on **Mute audio on mic use**.
+4. Check that **Mute audio on mic use** is on.
 5. Play some audio and start a short dictation. The sound mutes while the microphone is active and returns after you finish.
 
 Optionally enable **Open at login** to have MicYield ready when you sign in. During calls, turn off **Mute audio on mic use** so you can hear the other participants.
@@ -70,15 +69,17 @@ MicYield retains the legacy `local.AutoPause` bundle identifier and `systemAudio
 
 `Package.swift` supports Xcode and a healthy SwiftPM installation. The build scripts use `swiftc` directly to avoid the incompatible PackageDescription interface found in the current Command Line Tools. A local VFS overlay handles duplicated SwiftBridging module maps without modifying the installed SDK.
 
-## Apple Silicon and Intel downloads
+## Universal disk image
 
-Build both architectures and package separate app downloads with the installed Apple SDK:
+Build both native architectures and package one disk image with the installed Apple SDK:
 
 ```sh
 bash scripts/release.sh
 ```
 
-Artifacts are written to `build/releases/v<version>/`: `MicYield-Universal.zip`, `MicYield-Apple-Silicon.zip`, and `MicYield-Intel.zip`. The Universal app contains both native executable architectures. Each contains `MicYield.app`; extract it and move it to Applications. Signing uses `AUTOPAUSE_SIGN_IDENTITY` when supplied, otherwise ad-hoc signing.
+The release is `build/releases/v<version>/MicYield.dmg`. It contains one Universal app with both Apple Silicon and Intel executables, an Applications shortcut, and an illustrated drag-to-install window. The packaging script verifies the disk image, mounted app, architectures, signature, resources, and Finder layout before publishing the artifact. Signing uses `AUTOPAUSE_SIGN_IDENTITY` when supplied, otherwise ad-hoc signing.
+
+DMG packaging installs hash-pinned, MIT-licensed Python build tools into `build/dmg-tools`; they are not shipped in the app. It requires Python 3 and access to the official PyPI package index on the first build. See [packaging notices](Resources/DMG/NOTICE.txt). Building the app with `scripts/build.sh` does not use these packaging dependencies.
 
 For a single architecture, run `AUTOPAUSE_ARCH=arm64 bash scripts/build.sh` or `AUTOPAUSE_ARCH=x86_64 bash scripts/build.sh`. Explicit targets use `build/arm64` and `build/x86_64`; plain `bash scripts/build.sh` retains the host build at `build/MicYield.app`. Cross-compilation verifies binary architecture and signature; it does not replace testing on the target hardware.
 

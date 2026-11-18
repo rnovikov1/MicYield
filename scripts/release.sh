@@ -24,30 +24,15 @@ verify_app() {
     /usr/bin/codesign --verify --strict --verbose=2 "$app"
 }
 
-package_app() {
-    local app="$1" arch="$2" name="$3" archive
-    verify_app "$app" "$arch"
-    archive="$STAGING/$name"
-    /usr/bin/ditto -c -k --sequesterRsrc --keepParent "$app" "$archive"
-    /usr/bin/unzip -tq "$archive"
-    /usr/bin/ditto -x -k "$archive" "$STAGING/$arch"
-    verify_app "$STAGING/$arch/MicYield.app" "$arch"
-    mv -f "$archive" "$RELEASE_DIR/$name"
-    printf 'Release: %s/%s (%s)\n' "$RELEASE_DIR" "$name" "$arch"
-}
-
 for arch in arm64 x86_64; do
-    case "$arch" in
-        arm64) name="MicYield-Apple-Silicon.zip" ;;
-        x86_64) name="MicYield-Intel.zip" ;;
-    esac
     AUTOPAUSE_ARCH="$arch" bash scripts/build.sh
     [[ "$(/usr/bin/lipo -archs "build/$arch/MicYieldDiagnostics")" == "$arch" ]]
-    package_app "$PWD/build/$arch/MicYield.app" "$arch" "$name"
+    verify_app "$PWD/build/$arch/MicYield.app" "$arch"
 done
 
-UNIVERSAL="$PWD/build/universal/MicYield.app"
+UNIVERSAL="$STAGING/MicYield.app"
 /usr/bin/ditto build/x86_64/MicYield.app "$UNIVERSAL"
 /usr/bin/lipo -create build/arm64/MicYield.app/Contents/MacOS/MicYield build/x86_64/MicYield.app/Contents/MacOS/MicYield -output "$UNIVERSAL/Contents/MacOS/MicYield"
 /usr/bin/codesign --force --sign "${AUTOPAUSE_SIGN_IDENTITY:--}" --options runtime --entitlements Resources/MicYield.entitlements --identifier local.AutoPause "$UNIVERSAL"
-package_app "$UNIVERSAL" universal MicYield-Universal.zip
+verify_app "$UNIVERSAL" universal
+bash scripts/package-dmg.sh "$UNIVERSAL" "$RELEASE_DIR/MicYield.dmg"
