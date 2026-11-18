@@ -62,7 +62,11 @@
     )
       return;
     for (const link of document.querySelectorAll("a[href]")) {
-      if (link.dataset.localeChoice) continue;
+      if (
+        link.dataset.localeChoice ||
+        link.getAttribute("href")?.startsWith("#")
+      )
+        continue;
       let destination;
       try {
         destination = new URL(link.getAttribute("href"), current);
