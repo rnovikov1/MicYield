@@ -8,8 +8,8 @@ MicYield mutes system audio while an app uses your microphone, then restores the
 
 ## Download for Mac
 
-- [Apple Silicon (M1 or newer)](https://github.com/rrabochiy/MicYield/releases/download/v0.3.2/MicYield-Apple-Silicon.zip)
-- [Intel](https://github.com/rrabochiy/MicYield/releases/download/v0.3.2/MicYield-Intel.zip)
+- [Apple Silicon (M1 or newer)](https://github.com/rrabochiy/MicYield/releases/download/v0.3.3/MicYield-Apple-Silicon.zip)
+- [Intel](https://github.com/rrabochiy/MicYield/releases/download/v0.3.3/MicYield-Intel.zip)
 - [All releases](https://github.com/rrabochiy/MicYield/releases)
 
 Requires macOS 14.2 or later. Unzip the download, move MicYield to Applications, and launch it from your menu bar.
