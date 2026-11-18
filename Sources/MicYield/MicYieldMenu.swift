@@ -20,24 +20,12 @@ struct MicYieldMenu: View {
                 Spacer()
             }
 
-            settingToggle("Automatic audio control", description:
-                "Pause Apple Music and Spotify when an app uses your microphone. Resume only music paused by MicYield.",
+            settingToggle("Automatic audio muting", description:
+                "Mute system audio while an app uses your microphone. Playback keeps going; your previous sound level returns afterward.",
                 isOn: $model.enabled)
-            settingToggle("Mute all other audio", description:
-                "Silence YouTube and other apps during microphone use. Videos keep playing; your previous sound level returns afterward.",
-                isOn: $model.duckingEnabled)
-                .disabled(!model.enabled)
-
-            Divider()
-            VStack(alignment: .leading, spacing: 12) {
-                ForEach(Player.allCases, id: \.self) { player in playerRow(player) }
-            }
-            if let error = model.duckingReport?.error ?? model.report?.error {
+            if let error = model.report?.error {
                 Text(error).font(.caption).foregroundStyle(.orange).fixedSize(horizontal: false, vertical: true)
             }
-            Button("Open Automation Settings…", action: model.openAutomationSettings)
-                .buttonStyle(.link)
-                .help("Choose which music apps MicYield can pause and resume.")
 
             Divider()
             settingToggle("Open at login", description:
@@ -58,7 +46,7 @@ struct MicYieldMenu: View {
             .fixedSize(horizontal: false, vertical: true)
 
             HStack(alignment: .center, spacing: 12) {
-                Text("Quitting stops all automatic audio control.")
+                Text("Quitting restores system sound.")
                     .font(.caption).foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
                 Spacer(minLength: 0)
@@ -85,26 +73,4 @@ struct MicYieldMenu: View {
         .toggleStyle(.switch)
     }
 
-    private func playerRow(_ player: Player) -> some View {
-        let permission = model.report?.permissions[player]
-        return HStack {
-            VStack(alignment: .leading, spacing: 3) {
-                Text(player.title).font(.subheadline.weight(.medium))
-                Text(model.report?.owned.contains(player) == true ? "Paused by MicYield" : permission?.title ?? "Checking access…")
-                    .font(.caption).foregroundStyle(.secondary)
-            }
-            Spacer()
-            if permission == .needsConsent {
-                Button(model.requesting == player ? "Requesting…" : "Allow Control") { model.requestPermission(player) }
-                    .disabled(model.requesting != nil)
-            } else if permission == .notRunning {
-                Button("Open \(player.title)") { model.openPlayer(player) }
-            } else if permission == .denied {
-                Button("Open Settings", action: model.openAutomationSettings)
-            } else if permission == .allowed {
-                Image(systemName: "checkmark.circle.fill").foregroundStyle(.green)
-                    .accessibilityLabel("Playback control allowed")
-            }
-        }
-    }
 }

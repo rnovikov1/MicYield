@@ -1,23 +1,17 @@
 import Foundation
-import AppKit
-import ServiceManagement
 import MicYieldCore
 import MicYieldPlatform
 
 let reader = MicrophoneReader()
-let media = MediaController()
 let arguments = CommandLine.arguments
 let watchIndex = arguments.firstIndex(of: "--watch")
 let seconds = watchIndex.flatMap { index in arguments.indices.contains(index + 1) ? Double(arguments[index + 1]) : nil } ?? 0
 if watchIndex != nil, seconds <= 0 || seconds > 300 {
-    print("Usage: MicYieldDiagnostics [--watch 1...300]")
+    print("Usage: MicYieldDiagnostics [--watch 1...300] [--outputs] [--exercise-duck]")
     exit(2)
 }
 print("MicYield diagnostics; metadata only, no audio capture or permission prompts")
 print("macOS: \(ProcessInfo.processInfo.operatingSystemVersionString)")
-for player in Player.allCases {
-    print("\(player.title): \(media.permission(player).title)")
-}
 let deadline = ProcessInfo.processInfo.systemUptime + seconds
 var previous: String?
 repeat {

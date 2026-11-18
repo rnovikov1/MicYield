@@ -63,5 +63,5 @@ public struct MicrophoneReader: Sendable {
 
 struct AudioReadError: LocalizedError {
     let status: OSStatus
-    var errorDescription: String? { "Could not check microphone activity (error \(status)). Automatic playback is on hold." }
+    var errorDescription: String? { "Could not check microphone activity (error \(status)). Automatic audio muting is on hold." }
 }

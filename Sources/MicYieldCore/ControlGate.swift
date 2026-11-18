@@ -1,6 +1,6 @@
 import Foundation
 
-/// Invalidates queued work immediately, independently of the media worker's blocking I/O.
+/// Invalidates queued audio writes immediately when disabled or suspended.
 public final class ControlGate: @unchecked Sendable {
     private let lock = NSLock()
     private var generation: UInt64 = 0

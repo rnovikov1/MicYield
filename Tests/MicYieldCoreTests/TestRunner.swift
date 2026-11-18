@@ -12,7 +12,6 @@ func expectEqual<T: Equatable>(_ actual: T, _ expected: T, file: StaticString = 
 
 @main struct TestRunner {
     static func main() {
-        let suite = PauseEngineTests()
         let ducking = DuckingEngineTests()
         let platform = PlatformContractTests()
         let tests: [(String, () throws -> Void)] = [
@@ -30,23 +29,7 @@ func expectEqual<T: Equatable>(_ actual: T, _ expected: T, file: StaticString = 
             ("testOriginalVolumeIsSavedBeforeMuteWrite", ducking.testOriginalVolumeIsSavedBeforeMuteWrite),
             ("testUnreadableOutputCannotLoseOriginalVolume", ducking.testUnreadableOutputCannotLoseOriginalVolume),
             ("testDisableInvalidatesInFlightControlEvenAfterReenable", platform.testDisableInvalidatesInFlightControlEvenAfterReenable),
-            ("testSleepAndLockHoldIndependently", platform.testSleepAndLockHoldIndependently),
-            ("testSpotifyCommandsComeFromItsOwnDictionary", platform.testSpotifyCommandsComeFromItsOwnDictionary),
-            ("testMusicCommandsMatchInstalledSystemDictionary", platform.testMusicCommandsMatchInstalledSystemDictionary),
-            ("testMalformedDictionaryCannotProduceCommands", platform.testMalformedDictionaryCannotProduceCommands),
-            ("testPausesPlayingAndResumesOwnedTrackAfterQuietDelay", suite.testPausesPlayingAndResumesOwnedTrackAfterQuietDelay),
-            ("testAlreadyPausedOrStoppedNeverStarts", suite.testAlreadyPausedOrStoppedNeverStarts),
-            ("testSimultaneousPlayersAndLateStartingPlayerAreHandledIndependently", suite.testSimultaneousPlayersAndLateStartingPlayerAreHandledIndependently),
-            ("testBriefGapAndSecondMicrophoneUserDoNotResume", suite.testBriefGapAndSecondMicrophoneUserDoNotResume),
-            ("testUnknownMicrophoneStateResetsQuietCountdown", suite.testUnknownMicrophoneStateResetsQuietCountdown),
-            ("testManualResumeRelinquishesOwnershipAndDoesNotFightUser", suite.testManualResumeRelinquishesOwnershipAndDoesNotFightUser),
-            ("testTrackChangeSeekStopAndRelaunchPreventResume", suite.testTrackChangeSeekStopAndRelaunchPreventResume),
-            ("testClosedPlayerNeverRelaunches", suite.testClosedPlayerNeverRelaunches),
-            ("testFailedPauseDoesNotCreateOwnership", suite.testFailedPauseDoesNotCreateOwnership),
-            ("testSnapshotFailureRevokesOwnership", suite.testSnapshotFailureRevokesOwnership),
-            ("testResumeFailureIsNotRetriedLater", suite.testResumeFailureIsNotRetriedLater),
-            ("testDisableAndResetLeaveMusicPaused", suite.testDisableAndResetLeaveMusicPaused),
-            ("testNewCaptureSessionCanPauseAfterUserOverride", suite.testNewCaptureSessionCanPauseAfterUserOverride)
+            ("testSleepAndLockHoldIndependently", platform.testSleepAndLockHoldIndependently)
         ]
         var failures = 0
         for (name, test) in tests {

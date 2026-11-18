@@ -2,11 +2,19 @@ import Foundation
 import MicYieldCore
 
 public struct DuckingReport: Equatable, Sendable {
+    public let microphoneActive: Bool?
     public let silenced: Bool
     public let error: String?
+    public let suspended: Bool
+    public init(microphoneActive: Bool? = nil, silenced: Bool = false, error: String? = nil, suspended: Bool = false) {
+        self.microphoneActive = microphoneActive
+        self.silenced = silenced
+        self.error = error
+        self.suspended = suspended
+    }
 }
 
-/// Independent from Apple Events: a blocked player or permission prompt cannot delay audio restore.
+/// Serial metadata monitoring and system-output muting; never controls another app.
 public final class SystemAudioDucker: @unchecked Sendable {
     private let queue = DispatchQueue(label: "local.AutoPause.output", qos: .userInitiated)
     private let gate = ControlGate()
@@ -18,6 +26,7 @@ public final class SystemAudioDucker: @unchecked Sendable {
     private let report: @Sendable (DuckingReport) -> Void
     private let defaults: UserDefaults
     private let storageKey = "systemAudioLeases"
+    private var holds: Set<String> = []
     private var timer: DispatchSourceTimer?
     private var lastReport: DuckingReport?
     private lazy var engine: DuckingEngine = {
@@ -48,7 +57,10 @@ public final class SystemAudioDucker: @unchecked Sendable {
     }
     public func setSuspended(_ suspended: Bool, reason: String) {
         gate.setSuspended(suspended, reason: reason)
-        queue.async { self.tick() }
+        queue.async { [self] in
+            if suspended { holds.insert(reason) } else { holds.remove(reason) }
+            tick()
+        }
     }
     public func stop() {
         gate.setEnabled(false)
@@ -58,11 +70,13 @@ public final class SystemAudioDucker: @unchecked Sendable {
         }
     }
     private func tick() {
+        let activity = MicrophoneReader().read()
         generation = gate.capture()
         if generation != nil {
-            engine.update(microphone: MicrophoneReader().read().active, now: ProcessInfo.processInfo.systemUptime)
+            engine.update(microphone: activity.active, now: ProcessInfo.processInfo.systemUptime)
         } else { engine.restore() }
-        let value = DuckingReport(silenced: !engine.leases.isEmpty, error: engine.error ?? output.warning)
+        let value = DuckingReport(microphoneActive: activity.active, silenced: !engine.leases.isEmpty,
+            error: activity.error ?? engine.error ?? output.warning, suspended: !holds.isEmpty)
         if value != lastReport { lastReport = value; report(value) }
     }
 }
