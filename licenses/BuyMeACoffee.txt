@@ -1,0 +1,7 @@
+Buy Me a Coffee badge artwork
+Source: https://cdn.buymeacoffee.com/brand-assets/bmcbrand.zip?ver=1.5
+File: Buttons & Icons/yellow-button.png
+Provided by Buy Me a Coffee in its creator kit for support buttons.
+Buy Me a Coffee names and artwork belong to their respective owner and are not relicensed under MicYield's MIT license.
+The asset is bundled locally; no remote widget or script is loaded.
+Destination, confirmed in the owner's dashboard: https://buymeacoffee.com/sosun
