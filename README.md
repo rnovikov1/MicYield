@@ -4,6 +4,14 @@ A local menu bar app for macOS 14.2+, built with Swift 6 and SwiftUI. All app te
 
 When an app uses your microphone, AutoPause pauses Apple Music and Spotify. It resumes only music that it paused. It can also mute system audio so YouTube and other apps are silent during dictation, without a browser extension.
 
+## Download for Mac
+
+- [Apple Silicon (M1 or newer)](https://github.com/rrabochiy/AutoPause/releases/download/v0.2.1/AutoPause-Apple-Silicon.zip)
+- [Intel](https://github.com/rrabochiy/AutoPause/releases/download/v0.2.1/AutoPause-Intel.zip)
+- [All releases](https://github.com/rrabochiy/AutoPause/releases)
+
+Requires macOS 14.2 or later. Unzip the download, move AutoPause to Applications, and launch it from your menu bar.
+
 ## Using the menu
 
 - **Automatic audio control** is the master switch. Music pauses when the microphone is in use, then resumes only if AutoPause paused it. Turning this off also stops automatic muting.
