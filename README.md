@@ -2,7 +2,7 @@
 
 **Automatically Mute Mac Audio During Dictation**
 
-[Download for Mac](https://github.com/rrabochiy/MicYield/releases/download/v0.3.5/MicYield.dmg) · [Website](https://micyield.xyz/) · [Support MicYield](https://buymeacoffee.com/sosun)
+[Download for Mac](https://github.com/rnovikov1/MicYield/releases/download/v0.3.5/MicYield.dmg) · [Website](https://micyield.xyz/) · [Support MicYield](https://buymeacoffee.com/sosun)
 
 Your Mac goes quiet while you dictate. Your sound comes back when you’re done.
 
@@ -19,9 +19,9 @@ Music and videos keep playing silently while muted. MicYield controls sound outp
 
 ## Download for Mac
 
-- [Download for Mac — Universal, Apple Silicon and Intel](https://github.com/rrabochiy/MicYield/releases/download/v0.3.5/MicYield.dmg)
+- [Download for Mac — Universal, Apple Silicon and Intel](https://github.com/rnovikov1/MicYield/releases/download/v0.3.5/MicYield.dmg)
 - [Illustrated installation guide](https://micyield.xyz/download/)
-- [All releases](https://github.com/rrabochiy/MicYield/releases)
+- [All releases](https://github.com/rnovikov1/MicYield/releases)
 
 Requires macOS 14.2 or later. The Universal download runs on both Apple Silicon and Intel Macs.
 
@@ -54,7 +54,7 @@ There are no network requests, servers, telemetry, or subscriptions in the app.
 Install Apple's Command Line Tools (`xcode-select --install`) or Xcode. No Homebrew, external packages, subscription, or paid developer account is required.
 
 ```sh
-git clone https://github.com/rrabochiy/MicYield.git
+git clone https://github.com/rnovikov1/MicYield.git
 cd MicYield
 bash scripts/test.sh
 bash scripts/build.sh
